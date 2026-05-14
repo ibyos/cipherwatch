@@ -1,0 +1,11 @@
+[build]
+builder = "python"
+pythonVersion = "3.12"
+
+[deploy]
+startCommand = "python3 app/api.py"
+healthcheckPath = "/"
+port = 5000
+
+[processes]
+web = "python3 app/api.py"
