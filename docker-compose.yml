@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  domainsentry:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=alerts@domainsentry.com
+      - SMTP_PASS=YOUR_APP_PASSWORD

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomainSentry — Brand Protection Scanner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --card: #12121a; --border: #1e1e2e; --green: #00ff88; --orange: #ff6b35; --text: #e0e0e0; --muted: #666; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.5em; font-weight: 800; color: var(--green); }
+        .logo span { color: var(--orange); }
+        nav a { color: var(--muted); text-decoration: none; margin-left: 30px; transition: color 0.2s; }
+        nav a:hover { color: var(--green); }
+        .nav-cta { background: var(--green) !important; color: var(--bg) !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; }
+        .hero { text-align: center; padding: 100px 20px 60px; }
+        .hero h1 { font-size: 3.5em; font-weight: 900; margin-bottom: 20px; line-height: 1.1; }
+        .hero h1 .g { color: var(--green); }
+        .hero h1 .o { color: var(--orange); }
+        .hero p { font-size: 1.3em; color: var(--muted); max-width: 600px; margin: 0 auto 40px; }
+        .demo-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; max-width: 600px; margin: 0 auto; }
+        .demo-box input { width: 65%; padding: 14px 18px; font-size: 1em; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: #fff; outline: none; }
+        .demo-box input:focus { border-color: var(--green); }
+        .demo-box button { padding: 14px 24px; font-size: 1em; background: var(--green); color: var(--bg); font-weight: 700; border: none; border-radius: 8px; cursor: pointer; margin-left: 8px; }
+        .demo-box .result { margin-top: 15px; text-align: left; font-size: 0.85em; color: var(--muted); }
+        .section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
+        .section h2 { font-size: 2.2em; text-align: center; margin-bottom: 50px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; }
+        .card h3 { color: var(--green); margin-bottom: 12px; }
+        .card p { color: var(--muted); font-size: 0.95em; }
+        .card-icon { font-size: 2.5em; margin-bottom: 15px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 950px; margin: 0 auto; }
+        .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 35px; text-align: center; transition: all 0.3s; }
+        .price-card:hover { border-color: var(--green); transform: translateY(-4px); }
+        .price-card.featured { border-color: var(--green); box-shadow: 0 0 40px rgba(0,255,136,0.1); }
+        .price-card h3 { font-size: 1.3em; margin-bottom: 10px; }
+        .price-card .price { font-size: 3em; font-weight: 900; color: var(--green); }
+        .price-card .price small { font-size: 0.3em; color: var(--muted); }
+        .price-card ul { list-style: none; margin: 20px 0; color: var(--muted); text-align: left; }
+        .price-card li { padding: 8px 0; }
+        .price-card li::before { content: '✓ '; color: var(--green); }
+        .price-card button { width: 100%; padding: 14px; border-radius: 10px; font-size: 1em; font-weight: 700; cursor: pointer; border: none; }
+        .price-card button.primary { background: var(--green); color: var(--bg); }
+        .price-card button.secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        footer { text-align: center; padding: 40px; color: var(--muted); border-top: 1px solid var(--border); font-size: 0.9em; }
+        footer a { color: var(--green); text-decoration: none; }
+        @media (max-width: 768px) { .grid-3, .pricing-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.2em; } .section { padding: 50px 20px; } nav { padding: 15px 20px; flex-wrap: wrap; gap: 10px; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Domain<span>Sentry</span></div>
+        <div>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="https://t.me/DomainSentry_Bot" class="nav-cta">Try Free →</a>
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <h1>Find brand threats<br>before they find <span class="g">you</span><span class="o">r customers</span></h1>
+        <p>DomainSentry detects typosquatting, copycats and lookalike domains automatically. Get alerts before phishers strike.</p>
+        <div class="demo-box">
+            <input type="text" id="heroInput" placeholder="yourbrand.com" value="google">
+            <button onclick="doScan()">Scan Free</button>
+            <div class="result" id="heroResult">Enter any domain. Free. No signup required.</div>
+        </div>
+    </div>
+    
+    <div class="section" id="features">
+        <h2>How it works</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Smart Detection</h3>
+                <p>Generates 200+ typosquatting variants: homoglyphs, transpositions, dashes, dots, missing chars across all major TLDs.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Threat Scoring</h3>
+                <p>Whois enrichment + domain age detection. Domains registered less than 6 months ago are flagged as high-risk automatically.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔔</div>
+                <h3>Instant Alerts</h3>
+                <p>Email and Telegram notifications when a new brand-impersonating domain goes live. React before the damage is done.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section" id="pricing">
+        <h2>Simple pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="price">$0<small>/mo</small></div>
+                <ul>
+                    <li>1 domain</li>
+                    <li>1 scan per day</li>
+                    <li>Email alerts</li>
+                    <li>Basic report</li>
+                </ul>
+                <button class="secondary">Get started</button>
+            </div>
+            <div class="price-card featured">
+                <h3>Pro ⭐</h3>
+                <div class="price">$9<small>.99/mo</small></div>
+                <ul>
+                    <li>10 domains</li>
+                    <li>Unlimited scans</li>
+                    <li>Email + Telegram alerts</li>
+                    <li>API access</li>
+                    <li>Whois reports</li>
+                </ul>
+                <button class="primary">Start free trial</button>
+            </div>
+            <div class="price-card">
+                <h3>Business</h3>
+                <div class="price">$29<small>.99/mo</small></div>
+                <ul>
+                    <li>50 domains</li>
+                    <li>Webhook alerts</li>
+                    <li>Priority support</li>
+                    <li>PDF exports</li>
+                    <li>White-label reports</li>
+                </ul>
+                <button class="secondary">Contact us</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section" style="text-align:center; padding-bottom:20px;">
+        <h2>Don't let squatters steal your brand</h2>
+        <p style="color:var(--muted);margin-bottom:30px;">First 50 users get Pro free for 6 months.</p>
+        <a href="https://t.me/DomainSentry_Bot" style="display:inline-block;background:var(--green);color:var(--bg);padding:16px 40px;border-radius:12px;font-weight:700;font-size:1.1em;text-decoration:none;">Try it free on Telegram →</a>
+    </div>
+    
+    <footer>
+        DomainSentry v0.2 — Built by <a href="https://t.me/IbyosBot">⚡ ibyos</a>
+    </footer>
+    
+    <script>
+    async function doScan() {
+        const d = document.getElementById('heroInput').value.trim();
+        if (!d) return;
+        const r = document.getElementById('heroResult');
+        r.textContent = 'Scanning...';
+        try {
+            const resp = await fetch('http://localhost:5000/scan', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: 'domain='+encodeURIComponent(d) });
+            const data = await resp.json();
+            r.innerHTML = data.count === 0
+                ? '<b style="color:#00ff88">✅ No threats found!</b> ' + data.target + ' looks clean across ' + data.checked + ' domain variants.'
+                : `<b style="color:#ff6b35">⚠️ ${data.count} threats found!</b> ${data.threats.slice(0,5).map(t=>`<br><code>${t.domain}</code> → ${t.ip}`).join('')}`;
+        } catch(e) { r.textContent = '⚠️ Server offline — start: python3 app/api.py'; }
+    }
+    document.getElementById('heroInput').addEventListener('keydown', e => { if(e.key==='Enter') doScan(); });
+    </script>
+</body>
+</html>
